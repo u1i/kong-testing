@@ -46,3 +46,7 @@ curl -i -X POST \
 --data 'paths[]=/fx' \
 --data 'strip_path=true' \
 --data 'methods[]=GET'
+
+## Consume Route
+
+curl http://localhost:8000/fx/currency?currency=USD
