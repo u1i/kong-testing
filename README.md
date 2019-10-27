@@ -51,18 +51,38 @@ curl -i -X POST \
 
 curl http://localhost:8000/fx/currency?currency=USD
 
-## Activate API Key Auth
+## API Key Auth
 
+### Activate Plugin on Service
 curl -X POST http://localhost:8001/services/currency3/plugins --data "name=key-auth"
 
-## Add Consumer & Create API Key
+### Add Consumer & Generate Key
 
 curl -X POST http://localhost:8001/consumers --data "username=user1"   
 curl -X POST http://localhost:8001/consumers/user1/key-auth --data ""
 
-## Consume API with Key
+### Consume API with Key
 
 curl --header 'apikey: rVmNSTvgjGuvhax8nr1yc8XpRPZ3LvTW' localhost:8000/fx/currency?currency=USD
+
+## Basic Auth
+
+### Activate Plugin on Service
+
+curl -X POST http://localhost:8001/services/currency4/plugins \
+  --data "name=basic-auth"  \
+  --data "config.hide_credentials=false"
+  
+### Add Consumer & Set Credentials
+
+curl -X POST http://localhost:8001/consumers --data "username=user1"   
+curl -X POST http://localhost:8001/consumers/consumer1/basic-auth \
+    --data "username=me" \
+    --data "password=bla"
+    
+### Consume with Basic Auth
+
+curl -u me:bla localhost:8000/fx2/currency?currency=USD
 
 ## URLs
 
