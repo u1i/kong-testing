@@ -51,13 +51,18 @@ curl -i -X POST \
 
 curl http://localhost:8000/fx/currency?currency=USD
 
-## Add Consumer
-
-curl -X POST http://localhost:8001/consumers --data "username=user1"
-
 ## Activate API Key Auth
 
 curl -X POST http://localhost:8001/services/currency3/plugins --data "name=key-auth"
+
+## Add Consumer & Create API Key
+
+curl -X POST http://localhost:8001/consumers --data "username=user1"   
+curl -X POST http://localhost:8001/consumers/user1/key-auth --data ""
+
+## Consume API with Key
+
+curl --header 'apikey: rVmNSTvgjGuvhax8nr1yc8XpRPZ3LvTW' localhost:8000/fx/currency?currency=USD
 
 ## URLs
 
